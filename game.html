@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Training Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+        .game-header {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .game-rules {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 0 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .game-area {
+            display: none;
+            text-align: center;
+        }
+        .score-board {
+            margin-top: 20px;
+        }
+        .score-board span {
+            font-size: 24px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .grid div {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .correct {
+            background-color: #4CAF50;
+        }
+        .incorrect {
+            background-color: #f44336;
+        }
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">Memory Training Game</div>
+        <div class="game-rules">
+            <p>Welcome to the memory training game! You will be shown a number sequence for 5 seconds.</p>
+            <p>Your task is to remember the number and input it correctly after the countdown ends.</p>
+            <p>The game has 20 levels, with each level increasing in difficulty. Good luck!</p>
+        </div>
+        <button class="button" onclick="startGame()">Start Game</button>
+    </div>
+
+    <div class="game-area">
+        <div id="timer">Time remaining: 5s</div>
+        <div id="sequence"></div>
+        <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
+        <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <div class="grid" id="scoreGrid"></div>
+        <div class="score-board">
+            <span id="currentScore">Current Score: 0</span>
+        </div>
+    </div>
+
+    <script>
+        let currentLevel = 1;
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let sequence = '';
+        let timer;
+        let timerCount = 5;
+
+        const maxLevel = 20;
+        const levelScores = Array.from({ length: maxLevel }, (_, i) => (i + 1) * 5);
+
+        // Start the game
+        function startGame() {
+            document.querySelector('.game-header').style.display = 'none';
+            document.querySelector('.game-rules').style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+            document.querySelector('.game-area').style.display = 'block';
+            nextLevel();
+        }
+
+        // Generate a random sequence for the current level
+        function generateSequence(level) {
+            sequence = '';
+            for (let i = 0; i < level; i++) {
+                sequence += Math.floor(Math.random() * 10);
+            }
+            document.getElementById('sequence').innerText = sequence;
+        }
+
+        // Start a new level
+        function nextLevel() {
+            if (currentLevel > maxLevel) {
+                endGame();
+                return;
+            }
+
+            document.getElementById('userInput').classList.add('hidden');
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('userInput').value = '';
+
+            generateSequence(currentLevel);
+            document.getElementById('timer').innerText = `Time remaining: 5s`;
+
+            let count = timerCount;
+            timer = setInterval(() => {
+                if (count > 0) {
+                    count--;
+                    document.getElementById('timer').innerText = `Time remaining: ${count}s`;
+                } else {
+                    clearInterval(timer);
+                    document.getElementById('userInput').classList.remove('hidden');
+                    document.getElementById('submitBtn').classList.remove('hidden');
+                    document.getElementById('userInput').focus();
+                }
+            }, 1000);
+        }
+
+        // Check user's answer
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userInput').value;
+            const isCorrect = userAnswer === sequence;
+            if (isCorrect) {
+                correctAnswers++;
+                totalScore += levelScores[currentLevel - 1];
+                document.getElementById('currentScore').innerText = `Current Score: ${totalScore}`;
+                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('correct');
+            } else {
+                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('incorrect');
+            }
+            currentLevel++;
+            setTimeout(nextLevel, 1000);
+        }
+
+        // End the game and show the final score
+        function endGame() {
+            document.querySelector('.game-area').innerHTML = `
+                <div class="score-board">
+                    <span>Game Over! Your final score is: ${totalScore}</span>
+                </div>
+                <div class="score-board">
+                    <span>${totalScore >= 840 ? 'Excellent!' : 'Try again!'}</span>
+                </div>
+            `;
+        }
+
+        // Create the score grid
+        function createScoreGrid() {
+            const grid = document.getElementById('scoreGrid');
+            for (let i = 0; i < maxLevel; i++) {
+                const cell = document.createElement('div');
+                grid.appendChild(cell);
+            }
+        }
+
+        // Initialize the score grid when the page loads
+        window.onload = createScoreGrid;
+    </script>
+</body>
+</html>
