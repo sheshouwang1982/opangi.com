@@ -86,44 +86,17 @@
         <button class="button" onclick="startGame()">Start Game</button>
     </div>
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Training Game</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* 用 flexbox 布局确保内容垂直水平居中 */
-    body {
-      display: flex;
-      justify-content: center;  /* 水平居中 */
-      align-items: center;      /* 垂直居中 */
-      height: 100vh;            /* 视口高度 */
-      margin: 0;
-      background-color: #f7f7f7;
-    }
+       <div class="game-area">
+        <div id="timer">Time remaining: 5s</div>
+        <div id="sequence"></div>
+        <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
+        <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <div class="grid" id="scoreGrid"></div>
+        <div class="score-board">
+            <span id="currentScore">Current Score: 0</span>
+        </div>
+    </div>
 
-    /* 倒计时样式 */
-    #countdown {
-      font-size: 24px;
-      font-weight: bold;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      border-radius: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div id="countdown">
-    <p>Time remaining: <span id="time">5</span> seconds</p>
-  </div>
-
-  <!-- 其他游戏内容 -->
-  <script src="game.js"></script>
-</body>
-</html>
 
 
     <script>
