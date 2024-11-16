@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,6 +77,8 @@
         .ad-container {
             text-align: center;
             margin: 10px 0;
+            width: 100%; /* Ensures the ads have proper width */
+            height: auto;
         }
     </style>
 </head>
@@ -83,12 +86,12 @@
     <!-- Header Ad -->
     <div class="ad-container" id="ad-header">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+        <!-- zi1 -->
         <ins class="adsbygoogle"
-            style="display:block"
+            style="display:block; width: 728px; height: 90px"
             data-ad-client="ca-pub-1233302309770573"
             data-ad-slot="6390922645"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+            data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
@@ -103,12 +106,12 @@
         <!-- Inline Ad -->
         <div class="ad-container" id="ad-inline">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+            <!-- zi2 -->
             <ins class="adsbygoogle"
-                style="display:block"
+                style="display:block; width: 728px; height: 90px"
                 data-ad-client="ca-pub-1233302309770573"
                 data-ad-slot="7828127391"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                data-ad-format="auto"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
@@ -124,12 +127,12 @@
         <!-- In-Game Ad -->
         <div class="ad-container" id="ad-in-game">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+            <!-- zi3 -->
             <ins class="adsbygoogle"
-                style="display:block"
+                style="display:block; width: 728px; height: 90px"
                 data-ad-client="ca-pub-1233302309770573"
                 data-ad-slot="2523791834"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                data-ad-format="auto"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
@@ -142,30 +145,77 @@
     <!-- Footer Ad -->
     <div class="ad-container" id="ad-footer">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+        <!-- zi4 -->
         <ins class="adsbygoogle"
-            style="display:block"
+            style="display:block; width: 728px; height: 90px"
             data-ad-client="ca-pub-1233302309770573"
             data-ad-slot="8897628492"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+            data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <!-- Sticky Footer Ad -->
     <div class="ad-container" id="ad-sticky-footer">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+        <!-- zi5 -->
         <ins class="adsbygoogle"
-            style="display:block"
+            style="display:block; width: 728px; height: 90px"
             data-ad-client="ca-pub-1233302309770573"
             data-ad-slot="1138595969"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+            data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <script>
-        // 游戏逻辑...
-        // 省略其余代码
-    </script>
-</body>
-</html>
+        // 游戏逻辑
+        let currentLevel = 1;
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let sequence = '';
+        let timer;
+        let timerCount = 5;
+
+        const maxLevel = 20;
+        const levelScores = Array.from({ length: maxLevel }, (_, i) => (i + 1) * 5);
+
+        function startGame() {
+            document.querySelector('.game-header').style.display = 'none';
+            document.querySelector('.game-rules').style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+            document.querySelector('.game-area').style.display = 'block';
+            nextLevel();
+        }
+
+        function generateSequence(level) {
+            sequence = '';
+            for (let i = 0; i < level; i++) {
+                sequence += Math.floor(Math.random() * 10);
+            }
+            document.getElementById('sequence').innerText = sequence;
+        }
+
+        function nextLevel() {
+            if (currentLevel > maxLevel) {
+                endGame();
+                return;
+            }
+
+            document.getElementById('userInput').classList.add('hidden');
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('userInput').value = '';
+
+            generateSequence(currentLevel);
+            document.getElementById('timer').innerText = `Time remaining: 5s`;
+
+            let count = timerCount;
+            timer = setInterval(() => {
+                if (count > 0) {
+                    count--;
+                    document.getElementById('timer').innerText = `Time remaining: ${count}s`;
+                } else {
+                    clearInterval(timer);
+                    document.getElementById('userInput').classList.remove('hidden');
+                    document.getElementById('submitBtn').classList.remove('hidden');
+                    document.getElementById('userInput').focus();
+                }
+            }, 
