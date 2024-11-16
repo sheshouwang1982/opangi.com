@@ -16,7 +16,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: calc(100vh - 180px); /* Adjusted height for header and footer ads */
+            height: calc(100vh - 180px);
             background-color: #f7f7f7;
         }
         .game-header {
@@ -76,12 +76,12 @@
         .ad-container {
             text-align: center;
             margin: 10px 0;
-            width: 100%; /* Ensures the ads have proper width */
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- Header Ad (728x90) -->
+    <!-- Header Ad -->
     <div class="ad-container" id="ad-header">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
         <!-- 728 90 -->
@@ -102,19 +102,6 @@
             <p>The game has 20 levels, with each level increasing in difficulty. Good luck!</p>
         </div>
 
-        <!-- Inline Ad (300x250) -->
-        <div class="ad-container" id="ad-inline">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
-            <!-- 300 250 -->
-            <ins class="adsbygoogle"
-                style="display:inline-block;width:300px;height:250px"
-                data-ad-client="ca-pub-1233302309770573"
-                data-ad-slot="9594482748"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
         <button class="button" onclick="startGame()">Start Game</button>
     </div>
 
@@ -123,27 +110,13 @@
         <div id="sequence"></div>
         <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
         <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
-
-        <!-- In-Game Ad (300x250) -->
-        <div class="ad-container" id="ad-in-game">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
-            <!-- 3002502 -->
-            <ins class="adsbygoogle"
-                style="display:inline-block;width:300px;height:250px"
-                data-ad-client="ca-pub-1233302309770573"
-                data-ad-slot="5655237739"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
         <div class="grid" id="scoreGrid"></div>
         <div class="score-board">
             <span id="currentScore">Current Score: 0</span>
         </div>
     </div>
 
-    <!-- Footer Ad (728x90) -->
+    <!-- Footer Ad -->
     <div class="ad-container" id="ad-footer">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
         <!-- 728901 -->
@@ -155,5 +128,48 @@
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
+
+    <script>
+        let sequence = "";
+        let level = 1;
+
+        function startGame() {
+            document.querySelector(".container").style.display = "none";
+            document.querySelector(".game-area").style.display = "block";
+
+            generateSequence(level);
+            displaySequence();
+        }
+
+        function generateSequence(level) {
+            sequence = "";
+            for (let i = 0; i < level + 2; i++) {
+                sequence += Math.floor(Math.random() * 10);
+            }
+        }
+
+        function displaySequence() {
+            const sequenceElement = document.getElementById("sequence");
+            const timerElement = document.getElementById("timer");
+            sequenceElement.textContent = sequence;
+            timerElement.textContent = "Time remaining: 5s";
+
+            setTimeout(() => {
+                sequenceElement.textContent = "";
+                document.getElementById("userInput").classList.remove("hidden");
+                document.getElementById("submitBtn").classList.remove("hidden");
+            }, 5000);
+        }
+
+        function checkAnswer() {
+            const userInput = document.getElementById("userInput").value;
+            const result = userInput === sequence;
+
+            alert(result ? "Correct!" : "Incorrect!");
+            level++;
+            startGame();
+        }
+    </script>
 </body>
 </html>
+
