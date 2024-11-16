@@ -16,7 +16,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: calc(100vh - 180px); /* Adjusted height for header and footer ads */
             background-color: #f7f7f7;
         }
         .game-header {
@@ -73,9 +73,27 @@
         .hidden {
             visibility: hidden;
         }
+        .ad-container {
+            text-align: center;
+            margin: 10px 0;
+            width: 100%; /* Ensures the ads have proper width */
+        }
     </style>
 </head>
 <body>
+    <!-- Header Ad (728x90) -->
+    <div class="ad-container" id="ad-header">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+        <!-- 728 90 -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:728px;height:90px"
+            data-ad-client="ca-pub-1233302309770573"
+            data-ad-slot="4948660725"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container">
         <div class="game-header">Memory Training Game</div>
         <div class="game-rules">
@@ -83,6 +101,20 @@
             <p>Your task is to remember the number and input it correctly after the countdown ends.</p>
             <p>The game has 20 levels, with each level increasing in difficulty. Good luck!</p>
         </div>
+
+        <!-- Inline Ad (300x250) -->
+        <div class="ad-container" id="ad-inline">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+            <!-- 300 250 -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:300px;height:250px"
+                data-ad-client="ca-pub-1233302309770573"
+                data-ad-slot="9594482748"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <button class="button" onclick="startGame()">Start Game</button>
     </div>
 
@@ -91,108 +123,37 @@
         <div id="sequence"></div>
         <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
         <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
+
+        <!-- In-Game Ad (300x250) -->
+        <div class="ad-container" id="ad-in-game">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+            <!-- 3002502 -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:300px;height:250px"
+                data-ad-client="ca-pub-1233302309770573"
+                data-ad-slot="5655237739"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <div class="grid" id="scoreGrid"></div>
         <div class="score-board">
             <span id="currentScore">Current Score: 0</span>
         </div>
     </div>
 
-    <script>
-        let currentLevel = 1;
-        let correctAnswers = 0;
-        let totalScore = 0;
-        let sequence = '';
-        let timer;
-        let timerCount = 5;
-
-        const maxLevel = 20;
-        const levelScores = Array.from({ length: maxLevel }, (_, i) => (i + 1) * 5);
-
-        // Start the game
-        function startGame() {
-            document.querySelector('.game-header').style.display = 'none';
-            document.querySelector('.game-rules').style.display = 'none';
-            document.querySelector('button').style.display = 'none';
-            document.querySelector('.game-area').style.display = 'block';
-            nextLevel();
-        }
-
-        // Generate a random sequence for the current level
-        function generateSequence(level) {
-            sequence = '';
-            for (let i = 0; i < level; i++) {
-                sequence += Math.floor(Math.random() * 10);
-            }
-            document.getElementById('sequence').innerText = sequence;
-        }
-
-        // Start a new level
-        function nextLevel() {
-            if (currentLevel > maxLevel) {
-                endGame();
-                return;
-            }
-
-            document.getElementById('userInput').classList.add('hidden');
-            document.getElementById('submitBtn').classList.add('hidden');
-            document.getElementById('userInput').value = '';
-
-            generateSequence(currentLevel);
-            document.getElementById('timer').innerText = `Time remaining: 5s`;
-
-            let count = timerCount;
-            timer = setInterval(() => {
-                if (count > 0) {
-                    count--;
-                    document.getElementById('timer').innerText = `Time remaining: ${count}s`;
-                } else {
-                    clearInterval(timer);
-                    document.getElementById('userInput').classList.remove('hidden');
-                    document.getElementById('submitBtn').classList.remove('hidden');
-                    document.getElementById('userInput').focus();
-                }
-            }, 1000);
-        }
-
-        // Check user's answer
-        function checkAnswer() {
-            const userAnswer = document.getElementById('userInput').value;
-            const isCorrect = userAnswer === sequence;
-            if (isCorrect) {
-                correctAnswers++;
-                totalScore += levelScores[currentLevel - 1];
-                document.getElementById('currentScore').innerText = `Current Score: ${totalScore}`;
-                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('correct');
-            } else {
-                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('incorrect');
-            }
-            currentLevel++;
-            setTimeout(nextLevel, 1000);
-        }
-
-        // End the game and show the final score
-        function endGame() {
-            document.querySelector('.game-area').innerHTML = `
-                <div class="score-board">
-                    <span>Game Over! Your final score is: ${totalScore}</span>
-                </div>
-                <div class="score-board">
-                    <span>${totalScore >= 840 ? 'Excellent!' : 'Try again!'}</span>
-                </div>
-            `;
-        }
-
-        // Create the score grid
-        function createScoreGrid() {
-            const grid = document.getElementById('scoreGrid');
-            for (let i = 0; i < maxLevel; i++) {
-                const cell = document.createElement('div');
-                grid.appendChild(cell);
-            }
-        }
-
-        // Initialize the score grid when the page loads
-        window.onload = createScoreGrid;
-    </script>
+    <!-- Footer Ad (728x90) -->
+    <div class="ad-container" id="ad-footer">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
+        <!-- 728901 -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:728px;height:90px"
+            data-ad-client="ca-pub-1233302309770573"
+            data-ad-slot="2787180594"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </body>
 </html>
