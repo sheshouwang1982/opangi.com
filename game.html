@@ -30,13 +30,13 @@
             padding: 0 10px;
         }
         .button {
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 15px 25px;
+            font-size: 20px;
             cursor: pointer;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-top: 10px;
         }
         .button:hover {
@@ -46,32 +46,41 @@
             display: none;
             text-align: center;
         }
-        .score-board {
-            margin-top: 20px;
+        .timer {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
         }
-        .score-board span {
+        .sequence {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        #userInput {
             font-size: 24px;
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(20, 1fr);
-            gap: 5px;
+        #submitBtn {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             margin-top: 20px;
         }
-        .grid div {
-            width: 30px;
-            height: 30px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-        }
-        .correct {
-            background-color: #4CAF50;
-        }
-        .incorrect {
-            background-color: #f44336;
-        }
-        .hidden {
-            visibility: hidden;
+        #submitBtn:hover {
+            background-color: #005f73;
         }
         .ad-container {
             text-align: center;
@@ -106,14 +115,12 @@
     </div>
 
     <div class="game-area">
-        <div id="timer">Time remaining: 5s</div>
-        <div id="sequence"></div>
-        <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
-        <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
-        <div class="grid" id="scoreGrid"></div>
-        <div class="score-board">
-            <span id="currentScore">Current Score: 0</span>
+        <div id="timer" class="timer">Time remaining: 5s</div>
+        <div id="sequence" class="sequence"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Enter the number sequence" />
         </div>
+        <button class="button" id="submitBtn" onclick="checkAnswer()">Submit</button>
     </div>
 
     <!-- Footer Ad -->
