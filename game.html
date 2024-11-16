@@ -88,4 +88,111 @@
 
     <div class="game-area">
         <div id="timer">Time remaining: 5s</div>
-        <div id="sequenc
+        <div id="sequence"></div>
+        <input type="text" id="userInput" class="hidden" placeholder="Enter the number sequence" />
+        <button class="button hidden" id="submitBtn" onclick="checkAnswer()">Submit</button>
+        <div class="grid" id="scoreGrid"></div>
+        <div class="score-board">
+            <span id="currentScore">Current Score: 0</span>
+        </div>
+    </div>
+
+    <script>
+        let currentLevel = 1;
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let sequence = '';
+        let timer;
+        let timerCount = 5;
+
+        const maxLevel = 20;
+        const levelScores = Array.from({ length: maxLevel }, (_, i) => (i + 1) * 5);
+
+        // Start the game
+        function startGame() {
+            document.querySelector('.game-header').style.display = 'none';
+            document.querySelector('.game-rules').style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+            document.querySelector('.game-area').style.display = 'block';
+            nextLevel();
+        }
+
+        // Generate a random sequence for the current level
+        function generateSequence(level) {
+            sequence = '';
+            for (let i = 0; i < level; i++) {
+                sequence += Math.floor(Math.random() * 10);
+            }
+            document.getElementById('sequence').innerText = sequence;
+        }
+
+        // Start a new level
+        function nextLevel() {
+            if (currentLevel > maxLevel) {
+                endGame();
+                return;
+            }
+
+            document.getElementById('userInput').classList.add('hidden');
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('userInput').value = '';
+
+            generateSequence(currentLevel);
+            document.getElementById('timer').innerText = `Time remaining: 5s`;
+
+            let count = timerCount;
+            timer = setInterval(() => {
+                if (count > 0) {
+                    count--;
+                    document.getElementById('timer').innerText = `Time remaining: ${count}s`;
+                } else {
+                    clearInterval(timer);
+                    document.getElementById('userInput').classList.remove('hidden');
+                    document.getElementById('submitBtn').classList.remove('hidden');
+                    document.getElementById('userInput').focus();
+                }
+            }, 1000);
+        }
+
+        // Check user's answer
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userInput').value;
+            const isCorrect = userAnswer === sequence;
+            if (isCorrect) {
+                correctAnswers++;
+                totalScore += levelScores[currentLevel - 1];
+                document.getElementById('currentScore').innerText = `Current Score: ${totalScore}`;
+                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('correct');
+            } else {
+                document.getElementById('scoreGrid').children[currentLevel - 1].classList.add('incorrect');
+            }
+            currentLevel++;
+            setTimeout(nextLevel, 1000);
+        }
+
+        // End the game and show the final score
+        function endGame() {
+            document.querySelector('.game-area').innerHTML = `
+                <div class="score-board">
+                    <span>Game Over! Your final score is: ${totalScore}</span>
+                </div>
+                <div class="score-board">
+                    <span>${totalScore >= 840 ? 'Excellent!' : 'Try again!'}</span>
+                </div>
+            `;
+        }
+
+        // Create the score grid
+        function createScoreGrid() {
+            const grid = document.getElementById('scoreGrid');
+            for (let i = 0; i < maxLevel; i++) {
+                const cell = document.createElement('div');
+                grid.appendChild(cell);
+            }
+        }
+
+        // Initialize the score grid when the page loads
+        window.onload = createScoreGrid;
+    </script>
+</body>
+</html>
