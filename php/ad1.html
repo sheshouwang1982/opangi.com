@@ -178,17 +178,32 @@ function launchpopLink() {
             </div>
         </div>
 
-        <p class='small'>
-            <input type='checkbox'> 
-            Internet anti-virus <a href='#' target='_blank'>Privacy Policy</a>.
-        </p>
-        <script type='text/javascript'>
-            var id = Math.round(Math.random() * 3390) + 180;
-            document.write("<a href=http://www.opangi.com/html/" + id + ".html id=clickMe>Emergency treatment</a>")
-        </script> 
-        <a href='#' target='_blank'>SOS for help</a> 
-        <a href='#' target='_blank'>Inspection center</a> 
-        <a href='#' target='_blank'>main certification and alliances</a>
-    </div>
+     <p class='small'>
+    <input type='checkbox'> 
+    Internet anti-virus <a href='#' target='_blank'>Privacy Policy</a>.
+</p>
+
+<script type='text/javascript'>
+    var pages = [
+        'index.html', 
+        'GameReviews.html', 
+        'GameNews.html', 
+        'GameTips.html', 
+        'game.html', 
+        'about-us.html', 
+        'contact-us.html', 
+        'privacy-policy.html'
+    ];
+
+    var id = Math.floor(Math.random() * pages.length);  // 生成一个0-7之间的随机数
+    var randomPage = pages[id];  // 根据随机数选择页面
+    document.write("<a href='http://www.opangi.com/html/" + randomPage + "' id='clickMe'>Emergency treatment</a>");
+</script> 
+
+<a href='#' target='_blank'>SOS for help</a> 
+<a href='#' target='_blank'>Inspection center</a> 
+<a href='#' target='_blank'>main certification and alliances</a>
+
+</div>
 </body>
 </html>
