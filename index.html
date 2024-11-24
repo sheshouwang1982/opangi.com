@@ -73,6 +73,41 @@
             max-width: 800px;
             margin: 20px auto;
         }
+        .game-section {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .game-column {
+            width: 30%;
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .game-column h3 {
+            color: #4CAF50;
+            font-size: 24px;
+        }
+        .game-column p {
+            font-size: 16px;
+            color: #555;
+        }
+        .game-column a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .game-column a:hover {
+            background-color: #45a049;
+        }
         footer {
             background-color: #333;
             color: white;
@@ -121,6 +156,30 @@
     <section>
         <iframe class="game-iframe" src="https://opangi.com/game.html" title="Memory Training Game"></iframe>
     </section>
+
+    <!-- Game News, Game Tips, and Game Reviews Sections -->
+    <div class="game-section">
+        <!-- Game News -->
+        <div class="game-column">
+            <h3>Game News</h3>
+            <p>Stay updated with the latest news and updates on your favorite games. Find out what's new in the gaming world!</p>
+            <a href="GameNews.html">Read Game News</a>
+        </div>
+
+        <!-- Game Tips -->
+        <div class="game-column">
+            <h3>Game Tips & Tricks</h3>
+            <p>Discover expert tips and tricks to improve your gaming skills. Whether you're a beginner or a pro, we've got you covered!</p>
+            <a href="GameTips.html">Learn More</a>
+        </div>
+
+        <!-- Game Reviews -->
+        <div class="game-column">
+            <h3>Game Reviews</h3>
+            <p>Read honest reviews of the latest games, and find out which ones are worth your time and money.</p>
+            <a href="GameReviews.html">Check Out Reviews</a>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
