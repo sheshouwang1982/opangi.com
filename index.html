@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,28 +26,6 @@
         header h1 {
             margin: 0;
             font-size: 36px;
-        }
-        /* Top Navigation Bar */
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        nav .active {
-            background-color: #4CAF50;
-            color: white;
         }
         .main-content {
             padding: 20px;
@@ -95,6 +74,41 @@
             max-width: 800px;
             margin: 20px auto;
         }
+        .game-section {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around; /* Center the columns horizontally */
+            flex-wrap: wrap;
+        }
+        .game-column {
+            width: 30%;
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .game-column h3 {
+            color: #4CAF50;
+            font-size: 24px;
+        }
+        .game-column p {
+            font-size: 16px;
+            color: #555;
+        }
+        .game-column a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .game-column a:hover {
+            background-color: #45a049;
+        }
         footer {
             background-color: #333;
             color: white;
@@ -114,13 +128,6 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <nav>
-        <a href="GameNews.html" class="active">Game News</a>
-        <a href="GameTips.html">Game Tips</a>
-        <a href="GameReviews.html">Game Reviews</a>
-    </nav>
-
     <header>
         <h1>Memory Training Game</h1>
         <p>Boost your brain power with our fun memory game! Test your memory, improve your recall abilities, and challenge yourself.</p>
@@ -133,4 +140,40 @@
         <a href="https://opangi.com/game.html" class="cta-button" target="_blank">Play the Game</a>
     </div>
 
-    <se
+    <!-- Game News, Game Tips, and Game Reviews Sections -->
+    <div class="game-section">
+        <!-- Game News -->
+        <div class="game-column">
+            <h3>Game News</h3>
+            <p>Stay updated with the latest news and updates on your favorite games. Find out what's new in the gaming world!</p>
+            <a href="GameNews.html">Read Game News</a>
+        </div>
+
+        <!-- Game Tips -->
+        <div class="game-column">
+            <h3>Game Tips & Tricks</h3>
+            <p>Discover expert tips and tricks to improve your gaming skills. Whether you're a beginner or a pro, we've got you covered!</p>
+            <a href="GameTips.html">Learn More</a>
+        </div>
+
+        <!-- Game Reviews -->
+        <div class="game-column">
+            <h3>Game Reviews</h3>
+            <p>Read honest reviews of the latest games, and find out which ones are worth your time and money.</p>
+            <a href="GameReviews.html">Check Out Reviews</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Opangi. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="contact-us.html">Contact Us</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
