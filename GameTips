@@ -9,8 +9,6 @@
     <meta name="author" content="opangi.com">
     <title>Game Tips | Improve Your Gaming Skills</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1233302309770573" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -20,35 +18,18 @@
     </header>
 
     <div class="main-content">
-        <!-- Google Ad 1 -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1233302309770573" data-ad-slot="6390922645" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        
         <article>
             <h2>Latest Tips & Tricks</h2>
             <p>Here you can publish your articles on game tips and tricks to share with other players.</p>
-            
-            <!-- Google Ad 2 -->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1233302309770573" data-ad-slot="7828127391" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-            
             <h3>Tip #1: Mastering Your Memory in Puzzle Games</h3>
             <p>Learn how to improve your memory with simple exercises that help you recall game sequences faster and more accurately.</p>
-            
+
             <h3>Tip #2: Secret Strategies for Winning Multiplayer Games</h3>
             <p>Unlock the best strategies to dominate in your favorite multiplayer games. From communication to positioning, learn how to outsmart your opponents.</p>
         </article>
-        
-        <!-- Google Ad 3 -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1233302309770573" data-ad-slot="2523791834" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    
+
     <footer>
-        <!-- Google Ad 4 -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1233302309770573" data-ad-slot="8897628492" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        
         <p>&copy; 2024 Opangi. All rights reserved.</p>
         <div class="footer-links">
             <a href="privacy-policy.html">Privacy Policy</a>
